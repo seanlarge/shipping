@@ -19,7 +19,7 @@ const styles = theme => ({
  class GetWeight extends React.Component{
 
     handleChange = (e) => {
-        console.log(e.target.value);
+        this.props.wizardContext.weight = e.target.value
     };
 
     render(){
@@ -32,7 +32,7 @@ const styles = theme => ({
                 <FormControl>
                     <Input
                         id="adornment-weight"
-                        value={this.props.wizardContext.weight}
+                        defaultValue={this.props.wizardContext.weight}
                         onChange={(e) => this.handleChange(e)}
                         endAdornment={<InputAdornment position="end">lb</InputAdornment>}
                         inputProps={{

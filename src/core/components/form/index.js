@@ -27,10 +27,9 @@ class AddressForm extends React.Component {
     }
 
     handleChange = (e, key) => {
-        console.log(e.target.value);
         this.props.wizardContext[key] = e.target.value;
-        console.log(this.props.wizardContext);
-    }
+
+    };
 
     render() {
         const {classes} = this.props;
