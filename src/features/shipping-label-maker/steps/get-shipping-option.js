@@ -29,7 +29,15 @@ class GetShippingOption extends React.Component {
             ShippingOptions: {
                 ground: 1,
                 priority: 2
-            }
+            },
+            selected: "ground"
+        };
+
+        if(props.wizardContext.shippingOption === "" || props.wizardContext.shippingOption === 1){
+            this.state.selected = "ground";
+
+        } else {
+             this.state.selected = "priority";
         }
     }
 
@@ -37,16 +45,15 @@ class GetShippingOption extends React.Component {
         console.log(e.target.value);
         this.props.wizardContext.shippingOption = e.target.value;
         console.log(this.props.wizardContext);
+        this.setState(() => {
+            return {
+                selected: e.target.value
+            }
+        })
     };
 
-    getOption = () => {
-        if(this.props.wizardContext.shippingOption === "" || this.props.wizardContext.shippingOption === 1){
-            console.log("true")
-            return "ground";
-        } else {
-            return "priority";
-        }
-    };
+    //TODO ONLY USING THIS LIFECYCLE METHOD BECAUSE WE CAN'T USE A STORE FOR CHALLENGE
+
 
     render() {
         const {classes} = this.props;
@@ -58,7 +65,7 @@ class GetShippingOption extends React.Component {
                 <form>
                     <FormControl>
                         <Select className={classes.select}
-                                defaultValue={this.getOption()}
+                                value={this.props.wizardContext.shippingOption}
                                 onChange={(e) => {
                                     this.handleChange(e)
                                 }}
