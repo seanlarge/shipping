@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StepContent from '@material-ui/core/StepContent';
 import AddressForm from "../../../core/components/form/index";
 import Button from "@material-ui/core/Button";
 import {withStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
     button: {

@@ -34,8 +34,7 @@ class Wizard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeStep: 0,
-            selectedShipping: "ground"
+            activeStep: 0
         };
 
     }
@@ -66,7 +65,7 @@ class Wizard extends React.Component {
             <GetWeight wizardContext={this.props.wizardContext} onAction={(action) => this.handleAction(action)}
                        activeStep={this.state.activeStep} getHeader={this.props.header(this.state.activeStep)} />,
             <GetShippingOption wizardContext={this.props.wizardContext} onAction={(action) => this.handleAction(action)}
-                               activeStep={this.state.activeStep} getHeader={this.props.header(this.state.activeStep)} selected={(value) => this.setSelected(value)}/>,
+                               activeStep={this.state.activeStep} getHeader={this.props.header(this.state.activeStep)} />,
             <Confirm wizardContext={this.props.wizardContext} onAction={(action) => this.handleAction(action)}
                      activeStep={this.state.activeStep} getHeader={this.props.header(this.state.activeStep)} />
         ];

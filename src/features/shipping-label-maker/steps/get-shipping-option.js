@@ -16,15 +16,14 @@ const styles = theme => ({
     buttonContainer: {
         marginTop: "2%"
     },
-    select:{
+    select: {
         width: "100px"
     }
 });
 
 
-
 class GetShippingOption extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             ShippingOptions: {
@@ -34,11 +33,19 @@ class GetShippingOption extends React.Component {
         }
     }
 
-    handleChange = (e) =>{
+    handleChange = e => {
         console.log(e.target.value);
         this.props.wizardContext.shippingOption = e.target.value;
-        this.props.selected(e.target.value);
         console.log(this.props.wizardContext);
+    };
+
+    getOption = () => {
+        if(this.props.wizardContext.shippingOption === "" || this.props.wizardContext.shippingOption === 1){
+            console.log("true")
+            return "ground";
+        } else {
+            return "priority";
+        }
     };
 
     render() {
@@ -48,16 +55,18 @@ class GetShippingOption extends React.Component {
                 <Typography component="h2" variant="headline" gutterBottom>
                     {this.props.getHeader}
                 </Typography>
-                <form >
+                <form>
                     <FormControl>
                         <Select className={classes.select}
-                                value={this.props.selected}
-                                onChange={(e) => {this.handleChange(e)}}
+                                defaultValue={this.getOption()}
+                                onChange={(e) => {
+                                    this.handleChange(e)
+                                }}
                         >
-                            {Object.entries(this.state.ShippingOptions).map((option,index) =>{
+                            {Object.entries(this.state.ShippingOptions).map((option, index) => {
                                 let optionName = option[0];
                                 let optionValue = option[1];
-                                return(
+                                return (
                                     <MenuItem key={optionName} value={optionValue}>{optionName}</MenuItem>
                                 )
                             })}

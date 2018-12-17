@@ -22,9 +22,6 @@ const styles = theme => ({
 });
 
 class AddressForm extends React.Component {
-    constructor(props) {
-        super(props)
-    }
 
     handleChange = (e, key) => {
         this.props.wizardContext[key] = e.target.value;

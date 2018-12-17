@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AddressForm from "../../../core/components/form";
 import Button from "@material-ui/core/Button";
-import StepContent from "@material-ui/core/StepContent";
 import {withStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 
