@@ -4,117 +4,103 @@ import {withStyles} from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Paper from "@material-ui/core/Paper";
 
-import GetSenderAddress from './steps/get-sender-address';
-import GetReceiverAddress from './steps/get-receiver-address';
-import GetWeight from './steps/get-weight';
-import GetShippingOption from './steps/get-shipping-option';
-import Confirm from './steps/confirm';
+import GetSenderAddress from '../../../features/shipping-label-maker/steps/get-sender-address';
+import GetReceiverAddress from '../../../features/shipping-label-maker/steps/get-receiver-address';
+import GetWeight from '../../../features/shipping-label-maker/steps/get-weight';
+import GetShippingOption from '../../../features/shipping-label-maker/steps/get-shipping-option';
+import Confirm from '../../../features/shipping-label-maker/steps/confirm';
 
 const styles = theme => ({
     root: {
         width: '90%',
+        flexGrow: '1'
     },
     button: {
         marginRight: theme.spacing.unit,
     },
-    instructions: {
-        marginTop: theme.spacing.unit,
-        marginBottom: theme.spacing.unit,
+    paper: {
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+        width: "85%",
+        marginLeft: "7%"
     },
 });
 
 
+class Wizard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeStep: 0
+        };
 
+    }
 
+    handleAction = (action) => {
+        if (action === "next") {
+            this.setState({
+                activeStep: this.state.activeStep + 1
+            });
+        } else {
+            this.setState({
+                activeStep: this.state.activeStep - 1
+            });
+        }
+    };
 
-class HorizontalLinearStepper extends React.Component {
+    renderSteps = (index) => {
+        let steps = [
+            <GetSenderAddress wizardContext={this.props.wizardContext} onAction={(action) => this.handleAction(action)}
+                              activeStep={this.state.activeStep} getHeader={this.props.header(this.state.activeStep)} />,
+            <GetReceiverAddress wizardContext={this.props.wizardContext}
+                                onAction={(action) => this.handleAction(action)} activeStep={this.state.activeStep} getHeader={this.props.header(this.state.activeStep)}/>,
+            <GetWeight wizardContext={this.props.wizardContext} onAction={(action) => this.handleAction(action)}
+                       activeStep={this.state.activeStep} getHeader={this.props.header(this.state.activeStep)} />,
+            <GetShippingOption wizardContext={this.props.wizardContext} onAction={(action) => this.handleAction(action)}
+                               activeStep={this.state.activeStep} getHeader={this.props.header(this.state.activeStep)} />,
+            <Confirm wizardContext={this.props.wizardContext} onAction={(action) => this.handleAction(action)}
+                     activeStep={this.state.activeStep} getHeader={this.props.header(this.state.activeStep)} />
+        ];
+        return steps[index];
+    };
 
+    render() {
+        const {classes} = this.props;
 
+        return (
+            <div className={classes.root}>
+                <Stepper activeStep={this.state.activeStep}>
+                    {this.props.steps.map((label, index) => {
+                        const props = {};
+                        const labelProps = {};
+                        return (
 
-handleNext = () => {
-    this.props.next();
-};
-
-handleBack = () => {
-    this.props.back();
-
-};
-
-
-handleReset = () => {
-    this.props.reset();
-};
-
-
-render()
-{
-    const {classes} = this.props;
-
-    return (
-        <div className={classes.root}>
-            <Stepper activeStep={this.props.activeStep}>
-               <GetSenderAddress wizardContext={{test:"test"}} onAction={() => this.handleNext()} />
-                <GetReceiverAddress wizardContext={{test:"test"}} onAction={() => this.handleNext()} />
-                <GetWeight wizardContext={{test:"test"}} onAction={() => this.handleNext()} />
-                <GetShippingOption wizardContext={{test:"test"}} onAction={() => this.handleNext()} />
-                <Confirm wizardContext={{test:"test"}} onAction={() => this.handleNext()} />
-            </Stepper>
-            <div>
-                {this.props.activeStep === this.props.steps.length ? (
-                    <div>
-                        <Typography className={classes.instructions}>
-                            Shipping Label Created - you&apos;re finished
-                        </Typography>
-                        <Button onClick={this.handleReset} className={classes.button}>
-                            Reset
-                        </Button>
+                            <Step key={label} {...props}>
+                                <StepLabel {...labelProps}>{label}</StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
+                {
+                    <div style={{marginTop: "2%"}}>
+                        <Paper className={classes.paper}>
+                            {this.renderSteps(this.state.activeStep)}
+                        </Paper>
                     </div>
-                ) : (
-                    <div>
-                        <div>
-                            <Button
-                                disabled={this.props.activeStep === 0}
-                                onClick={this.handleBack}
-                                className={classes.button}
-                            >
-                                Back
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={this.handleNext}
-                                className={classes.button}
-                            >
-                                {this.props.activeStep === this.props.steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
-                        </div>
-                    </div>
-                )}
+                }
             </div>
-        </div>
-    );
-}
+        );
+    }
 }
 
-HorizontalLinearStepper.propTypes = {
-    classes: PropTypes.object
+Wizard.propTypes = {
+    header: PropTypes.func.isRequired,
+    steps: PropTypes.array.isRequired,
+    wizardContext: PropTypes.object.isRequired,
+    onComplete: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(HorizontalLinearStepper);
-
-//TODO we pass an array of steps via props but don't map them
-// TODO Steps can be dynamically created like so below
-{/*<Stepper activeStep={this.props.activeStep}>*/}
-    {/*{this.props.steps.map((label, index) => {*/}
-        {/*const props = {};*/}
-        {/*const labelProps = {};*/}
-        {/*return (*/}
-            {/*<Step key={label} {...props}>*/}
-                {/*<StepLabel {...labelProps}>{label}</StepLabel>*/}
-            {/*</Step>*/}
-        {/*);*/}
-    {/*})}*/}
-{/*</Stepper>*/}
+export default withStyles(styles)(Wizard);
