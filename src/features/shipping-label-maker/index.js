@@ -9,21 +9,21 @@ export default class ShippingLabelMaker extends React.Component {
         this.state = {
             wizardContext: {
                 from: {
-                    name: "John Smith",
-                    street: "131 Dartmouth St",
-                    city: "Boston",
-                    state: "MA",
-                    zip: "02116"
+                    name: "",
+                    street: "",
+                    city: "",
+                    state: "",
+                    zip: ""
                 },
                 to: {
-                    name: "Linda Jackson",
-                    street: "40 Fulton St",
-                    city: "New York",
-                    state: "NY",
-                    zip: "10038"
+                    name: "",
+                    street: "",
+                    city: "",
+                    state: "",
+                    zip: ""
                 },
-                weight: 2,
-                shippingOption: 1
+                weight: null,
+                shippingOption: null
             }
         }
     }
@@ -42,7 +42,7 @@ export default class ShippingLabelMaker extends React.Component {
             default:
                 return 'Unknown step';
         }
-    }
+    };
 
     handleOnComplete = () =>{
         console.log(this.state.wizardContext);
