@@ -9,27 +9,38 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 
 const styles = theme => ({
+
     button: {
         marginRight: theme.spacing.unit,
     },
     buttonContainer: {
         marginTop: "2%"
+    },
+    select:{
+        width: "100px"
     }
 });
 
-const ShippingOptions = {
-    ground: 1,
-    priority: 2
-}
+
 
 class GetShippingOption extends React.Component {
     constructor(props){
-        super(props)
+        super(props);
+        this.state = {
+            ShippingOptions: {
+                ground: 1,
+                priority: 2
+            }
+        }
     }
+
     handleChange = (e) =>{
         console.log(e.target.value);
-        this.props.wizardContext.shippingOption = e.target.value
-    }
+        this.props.wizardContext.shippingOption = e.target.value;
+        this.props.selected(e.target.value);
+        console.log(this.props.wizardContext);
+    };
+
     render() {
         const {classes} = this.props;
         return (
@@ -37,17 +48,22 @@ class GetShippingOption extends React.Component {
                 <Typography component="h2" variant="headline" gutterBottom>
                     {this.props.getHeader}
                 </Typography>
-                <FormControl>
-                    <Select defaultValue={ this.props.wizardContext.shippingOption} onChange={(e) => {this.handleChange(e)}}>
-                        {Object.entries(ShippingOptions).map((option,index) =>{
-                            let optionName = option[0];
-                            let optionValue = option[1];
-                            return(
-                                <MenuItem key={optionName} value={optionValue}>{optionName}</MenuItem>
-                            )
-                        })}
-                    </Select>
-                </FormControl>
+                <form >
+                    <FormControl>
+                        <Select className={classes.select}
+                                value={this.props.selected}
+                                onChange={(e) => {this.handleChange(e)}}
+                        >
+                            {Object.entries(this.state.ShippingOptions).map((option,index) =>{
+                                let optionName = option[0];
+                                let optionValue = option[1];
+                                return(
+                                    <MenuItem key={optionName} value={optionValue}>{optionName}</MenuItem>
+                                )
+                            })}
+                        </Select>
+                    </FormControl>
+                </form>
                 <div className={classes.buttonContainer}>
                     <div>
                         <Button

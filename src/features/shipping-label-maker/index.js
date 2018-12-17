@@ -23,7 +23,7 @@ export default class ShippingLabelMaker extends React.Component {
                     zip: ""
                 },
                 weight: null,
-                shippingOption: null
+                shippingOption: ""
             }
         }
     }
