@@ -27,7 +27,7 @@ class GetReceiverAddress extends React.Component {
                 <Typography component="h2" variant="headline" gutterBottom>
                     {this.props.getHeader}
                 </Typography>
-                <AddressForm wizardContext={this.props.wizardContext}/>
+                <AddressForm wizardContext={this.props.wizardContext.to}/>
                 <div>
                     <div>
                         <Button

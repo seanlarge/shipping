@@ -28,7 +28,7 @@ class GetSenderAddress extends React.Component {
                    <Typography component="h2" variant="headline" gutterBottom>
                        {this.props.getHeader}
                    </Typography>
-                   <AddressForm wizardContext={this.props.wizardContext}/>
+                   <AddressForm wizardContext={this.props.wizardContext.from} />
                    <div>
                        <div>
                            <Button
@@ -57,8 +57,8 @@ class GetSenderAddress extends React.Component {
 GetSenderAddress.propTypes = {
     wizardContext: PropTypes.object.isRequired,
     onAction: PropTypes.func.isRequired,
-    activeStep: PropTypes.int,
-    getHeader: PropTypes.func.isRequired
+    activeStep: PropTypes.number,
+    getHeader: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(GetSenderAddress);
