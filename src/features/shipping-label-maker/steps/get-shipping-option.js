@@ -4,8 +4,8 @@ import Button from "@material-ui/core/Button";
 import {withStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
-import Input from "@material-ui/core/Input";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 const styles = theme => ({
@@ -17,13 +17,19 @@ const styles = theme => ({
     }
 });
 
-const ShippingOption = {
+const ShippingOptions = {
     ground: 1,
     priority: 2
 }
 
 class GetShippingOption extends React.Component {
-
+    constructor(props){
+        super(props)
+    }
+    handleChange = (e) =>{
+        console.log(e.target.value);
+        this.props.wizardContext.shippingOption = e.target.value
+    }
     render() {
         const {classes} = this.props;
         return (
@@ -32,15 +38,15 @@ class GetShippingOption extends React.Component {
                     {this.props.getHeader}
                 </Typography>
                 <FormControl>
-                    <Input
-                        id="adornment-weight"
-                        value={this.props.wizardContext.weight}
-                        onChange={(e) => this.handleChange(e)}
-                        endAdornment={<InputAdornment position="end">lb</InputAdornment>}
-                        inputProps={{
-                            'aria-label': 'Weight',
-                        }}
-                    />
+                    <Select defaultValue={ this.props.wizardContext.shippingOption} onChange={(e) => {this.handleChange(e)}}>
+                        {Object.entries(ShippingOptions).map((option,index) =>{
+                            let optionName = option[0];
+                            let optionValue = option[1];
+                            return(
+                                <MenuItem key={optionName} value={optionValue}>{optionName}</MenuItem>
+                            )
+                        })}
+                    </Select>
                 </FormControl>
                 <div className={classes.buttonContainer}>
                     <div>
