@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Wizard from '../../../core/components/wizard/index';
 import sinon from 'sinon';
-import enzyme from 'enzyme';
+import {shallow, mount} from 'enzyme';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
