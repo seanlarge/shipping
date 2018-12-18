@@ -5,6 +5,8 @@ I have left comments by starting them with : TODO. In on step, I used the constr
 component mounted. I looked into using different lifecycle methods like componentDidMount(which comes after render()) and the getDerivedStateFromProps method.
 For style and reusable components I choose material UI, they have a nice way of styling things and creating reusable components. There are some minor validations on the forms and on the shipping options step.
 I broke down the form into a reusable component for collection addresses. I no that there are a few other components that could be broken out but I did not do them for the sake of time on this exercise. There will be a TODO mentioning so..
+As for using {prev: 1, next: 2,end: 3} to move the wizard back and forth, I did not use this approach because I used the stepper from MaterialUI. Material UI moves back and forth based on activeState prop. I passed this prop down to the steps to let them know if they should render their content
+or not. all of the other props mentioned I used and allowed the steps to control movement by using the onAction prop. the last step uses the onAction prop and passes "complete" as a param. The wizard onAction then calls it's props onComplete to complete the label 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
