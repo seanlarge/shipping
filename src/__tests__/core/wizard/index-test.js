@@ -2,33 +2,95 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Wizard from '../../../core/components/wizard/index';
 import sinon from 'sinon';
-import {shallow, mount} from 'enzyme';
+import chai from 'chai';
+const expect = chai.expect;
 
-it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const handleOnComplete = sinon.spy();
-    const wizardContext = {
-        from: {
-            name: "Sean Large",
+//TODO enzyme setup should be in setup file
+
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
+
+
+import {shallow, mount, render} from 'enzyme';
+
+
+describe("Wizard: ", () =>{
+    let handleOnComplete;
+    let wizardContext;
+    beforeEach(() =>{
+        handleOnComplete = sinon.spy();
+         wizardContext = {
+            from: {
+                name: "Sean Large",
                 street: "",
                 city: "",
                 state: "",
                 zip: ""
-        },
-        to: {
-            name: "",
+            },
+            to: {
+                name: "",
                 street: "",
                 city: "",
                 state: "",
                 zip: ""
-        },
-        weight: null,
+            },
+            weight: null,
             shippingOption: ""
-    };
+        };
+    });
 
-    ReactDOM.render(<Wizard header={() => {return "some type of header"}}
-                            wizardContext={wizardContext}
-                            steps={["Sender Address", "Receiver Address", "Weight", "Shipping Options", "Confirmation"]}
-                            onComplete={() => handleOnComplete()}/>, div);
-    ReactDOM.unmountComponentAtNode(div);
+    it('renders without crashing', (done) => {
+
+        const div = document.createElement('div');
+        ReactDOM.render(<Wizard header={() => {return "some type of header"}}
+                                wizardContext={wizardContext}
+                                steps={["Sender Address", "Receiver Address", "Weight", "Shipping Options", "Confirmation"]}
+                                onComplete={() => handleOnComplete()}/>, div);
+        expect(wizardContext.from.name).to.equal("Sean Large");
+        ReactDOM.unmountComponentAtNode(div);
+        done();
+    });
+
+    it('calls componentDidMount', (done) => {
+        sinon.spy(Wizard.prototype, 'componentDidMount');
+        const wrapper = mount(<Wizard header={() => {return "some type of header"}}
+                                      wizardContext={wizardContext}
+                                      steps={["Sender Address", "Receiver Address", "Weight", "Shipping Options", "Confirmation"]}
+                                      onComplete={() => handleOnComplete()}/>);
+        expect(Wizard.prototype.componentDidMount).to.have.property('callCount', 1);
+        done();
+    });
+
+    it('allows us to set wizardContext', (done) => {
+        const wrapper = mount(<Wizard header={() => {return "some type of header"}}
+                                      wizardContext={wizardContext}
+                                      steps={["Sender Address", "Receiver Address", "Weight", "Shipping Options", "Confirmation"]}
+                                      onComplete={() => handleOnComplete()}/>);
+        let newWizardContext ={
+            from: {
+                name: "Sean Large",
+                street: "",
+                city: "",
+                state: "",
+                zip: ""
+            },
+            to: {
+                name: "James",
+                street: "123 st",
+                city: "Washington",
+                state: "DC",
+                zip: "20003"
+            },
+            weight: null,
+            shippingOption: ""
+        };
+        expect(wrapper.props().wizardContext).to.equal(wizardContext);
+        wrapper.setProps({ wizardContext: newWizardContext });
+        expect(wrapper.props().wizardContext).to.equal(newWizardContext);
+        done();
+    });
+
+
 });

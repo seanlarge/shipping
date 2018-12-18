@@ -81,7 +81,7 @@ class Wizard extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Stepper activeStep={this.state.activeStep}>
+                <Stepper id="non-printable" activeStep={this.state.activeStep}>
                     {this.props.steps.map((label, index) => {
                         const props = {};
                         const labelProps = {};

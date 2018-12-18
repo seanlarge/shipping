@@ -45,8 +45,7 @@ export default class ShippingLabelMaker extends React.Component {
     };
 
     handleOnComplete = () =>{
-        console.log(this.state.wizardContext);
-        alert("Your Label is complete!");
+      window.print();
     };
 
     render() {
@@ -54,7 +53,7 @@ export default class ShippingLabelMaker extends React.Component {
             <div style={{display: "flex", justifyContent: "center", flexFlow: "row wrap", alignItems: "stretch", marginTop:"2%"}}>
                 <Grid container spacing={24}>
                     <Grid item xs={12}>
-                        <Typography component="h2" variant="display2" gutterBottom>
+                        <Typography id="non-printable" component="h2" variant="display2" gutterBottom>
                            Shipping Label Maker
                         </Typography>
                         <Wizard

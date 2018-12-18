@@ -27,15 +27,16 @@ class Confirm extends React.Component {
         const {classes} = this.props;
         return (
             <div style={{display: this.props.activeStep === 4 ? "inline" : "none"}}>
-                <Typography component="h2" variant="display1" gutterBottom>
+                <Typography id="non-printable" component="h2" variant="display1" gutterBottom>
                     {this.props.getHeader}
                 </Typography>
                 {/*TODO this label display should be it's own component, leaving in for sake of time*/}
-                <Typography variant="title" gutterBottom>
-                    From
-                </Typography>
-                <Divider variant="middle" />
-                <Typography variant="body1" gutterBottom align="left" >
+                <div id="printable">
+                    <Typography variant="title" gutterBottom>
+                        From
+                    </Typography>
+                    <Divider variant="middle" />
+                    <Typography variant="body1" gutterBottom align="left" >
                         <p>
                             <span><i>Name: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.from.name}</b>
                         </p>
@@ -51,57 +52,58 @@ class Confirm extends React.Component {
                         <p>
                             <span><i>City: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.from.zip}</b>
                         </p>
-                </Typography>
-                <Typography variant="title" gutterBottom>
-                    To
-                </Typography>
-                <Divider variant="middle" />
-                <Typography variant="body1" gutterBottom align="left">
-                    <p>
-                        <span><i>Name: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.to.name}</b>
-                    </p>
-                    <p>
-                        <span><i>Street: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.to.street}</b>
-                    </p>
-                    <p>
-                        <span><i>City: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.to.city}</b>
-                    </p>
-                    <p>
-                        <span><i>State: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.to.state}</b>
-                    </p>
-                    <p>
-                        <span><i>City: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.to.zip}</b>
-                    </p>
-                </Typography>
-                <Typography variant="title" gutterBottom>
-                    Weight
-                </Typography>
-                <Divider variant="middle" />
-                <Typography variant="body1" gutterBottom align="left">
-                    <p>
-                        <span><i>Weight: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.weight}</b>
-                    </p>
+                    </Typography>
+                    <Typography variant="title" gutterBottom>
+                        To
+                    </Typography>
+                    <Divider variant="middle" />
+                    <Typography variant="body1" gutterBottom align="left">
+                        <p>
+                            <span><i>Name: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.to.name}</b>
+                        </p>
+                        <p>
+                            <span><i>Street: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.to.street}</b>
+                        </p>
+                        <p>
+                            <span><i>City: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.to.city}</b>
+                        </p>
+                        <p>
+                            <span><i>State: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.to.state}</b>
+                        </p>
+                        <p>
+                            <span><i>City: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.to.zip}</b>
+                        </p>
+                    </Typography>
+                    <Typography variant="title" gutterBottom>
+                        Weight
+                    </Typography>
+                    <Divider variant="middle" />
+                    <Typography variant="body1" gutterBottom align="left">
+                        <p>
+                            <span><i>Weight: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.weight}</b>
+                        </p>
 
-                </Typography>
-                <Typography variant="title" gutterBottom>
-                    Shipping Option
-                </Typography>
-                <Divider variant="middle" />
-                   <Typography variant="body1" gutterBottom align="left">
-                       <p>
-                           <span><i>Shipping: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.shippingOption === 1 ? "ground" : "priority"}</b>
-                       </p>
-                   </Typography>
-                <Typography variant="title" gutterBottom>
-                    Total Cost
-                </Typography>
-                <Divider variant="middle" />
-                <Typography variant="body1" gutterBottom align="center">
-                    <p>
-                        <span><i>Cost: </i></span> <b style={{marginLeft: "2%"}}>{`$ ${this.getTotal()}`}</b>
-                    </p>
-                </Typography>
-                <div className={classes.buttonContainer}>
+                    </Typography>
+                    <Typography variant="title" gutterBottom>
+                        Shipping Option
+                    </Typography>
+                    <Divider variant="middle" />
+                    <Typography variant="body1" gutterBottom align="left">
+                        <p>
+                            <span><i>Shipping: </i></span> <b style={{marginLeft: "2%"}}>{this.props.wizardContext.shippingOption === 1 ? "ground" : "priority"}</b>
+                        </p>
+                    </Typography>
+                    <Typography variant="title" gutterBottom>
+                        Total Cost
+                    </Typography>
+                    <Divider variant="middle" />
+                    <Typography variant="body1" gutterBottom align="center">
+                        <p>
+                            <span><i>Cost: </i></span> <b style={{marginLeft: "2%"}}>{`$ ${this.getTotal()}`}</b>
+                        </p>
+                    </Typography>
+                </div>
+                <div id="non-printable" className={classes.buttonContainer}>
                     <div>
                         <Button
                             disabled={this.props.activeStep === 0}
