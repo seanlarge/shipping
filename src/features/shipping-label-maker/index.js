@@ -9,18 +9,18 @@ export default class ShippingLabelMaker extends React.Component {
         this.state = {
             wizardContext: {
                 from: {
-                    name: "",
-                    street: "",
-                    city: "",
-                    state: "",
-                    zip: ""
+                    name: "Sean Large",
+                    street: "1123 hope st sw, apt 100",
+                    city: "Washington",
+                    state: "DC",
+                    zip: "20045"
                 },
                 to: {
-                    name: "",
-                    street: "",
-                    city: "",
-                    state: "",
-                    zip: ""
+                    name: "Jenny Sweet",
+                    street: "234 test street",
+                    city: "Augusta",
+                    state: "GA",
+                    zip: "34543"
                 },
                 weight: null,
                 shippingOption: ""
