@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Typography from "@material-ui/core/Typography";
 import {withStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import InputLabel from "@material-ui/core/InputLabel";
+import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
     button: {
@@ -14,6 +16,14 @@ const styles = theme => ({
 });
 
 class Confirm extends React.Component {
+
+    getTotal =() =>{
+        const shippingRate = 0.40;
+       let shippingCost = this.props.wizardContext.weight * shippingRate *
+            (this.props.wizardContext.shippingOption === 1 ? 1 : 1.5);
+       return parseFloat(shippingCost.toString()).toFixed(2)
+    };
+
     render() {
         const {classes} = this.props;
         return (
@@ -21,69 +31,72 @@ class Confirm extends React.Component {
                 <Typography component="h2" variant="headline" gutterBottom>
                     {this.props.getHeader}
                 </Typography>
-                //TODO THIS CAN BE IT'S OWN COMPONENT
-                <Typography component="h2" variant="body" gutterBottom>
-                    <InputLabel htmlFor="component-simple">From</InputLabel>
-                    <tr>
-                        <td><b>Name: </b></td>
-                        <td>{this.props.wizardContext.from.name}</td>
-                    </tr>
-                    <tr>
-                        <td><b>Street: </b></td>
-                        <td>{this.props.wizardContext.from.street}</td>
-                    </tr>
-                    <tr>
-                        <td><b>City: </b></td>
-                        <td>{this.props.wizardContext.from.city}</td>
-                    </tr>
-                    <tr>
-                        <td><b>State: </b></td>
-                        <td>{this.props.wizardContext.from.state}</td>
-                    </tr>
-                    <tr>
-                        <td><b>City: </b></td>
-                        <td>{this.props.wizardContext.from.zip}</td>
-                    </tr>
+                {/*TODO this label display should be it's own component, leaving in for sake of time*/}
+                <Typography variant="subheading" gutterBottom>
+                    From
+                </Typography>
+                <Typography variant="body1" gutterBottom align="left" >
+                        <p>
+                            <span><i>Name: </i></span> <b>{this.props.wizardContext.from.name}</b>
+                        </p>
+                        <p>
+                            <span><i>Street: </i></span> <b>{this.props.wizardContext.from.street}</b>
+                        </p>
+                        <p>
+                            <span><i>City: </i></span> <b>{this.props.wizardContext.from.city}</b>
+                        </p>
+                        <p>
+                            <span><i>State: </i></span> <b>{this.props.wizardContext.from.state}</b>
+                        </p>
+                        <p>
+                            <span><i>City: </i></span> <b>{this.props.wizardContext.from.zip}</b>
+                        </p>
+                </Typography>
+                <Typography variant="subheading" gutterBottom>
+                    To
+                </Typography>
+                <Typography variant="body1" gutterBottom align="left">
+                    <p>
+                        <span><i>Name: </i></span> <b>{this.props.wizardContext.to.name}</b>
+                    </p>
+                    <p>
+                        <span><i>Street: </i></span> <b>{this.props.wizardContext.to.street}</b>
+                    </p>
+                    <p>
+                        <span><i>City: </i></span> <b>{this.props.wizardContext.to.city}</b>
+                    </p>
+                    <p>
+                        <span><i>State: </i></span> <b>{this.props.wizardContext.to.state}</b>
+                    </p>
+                    <p>
+                        <span><i>City: </i></span> <b>{this.props.wizardContext.to.zip}</b>
+                    </p>
+                </Typography>
+                <Typography variant="subheading" gutterBottom>
+                    Weight
+                </Typography>
+                <Typography variant="body1" gutterBottom align="left">
+                    <p>
+                        <span><i>Weight: </i></span> <b>{this.props.wizardContext.weight}</b>
+                    </p>
 
-                    <InputLabel htmlFor="component-simple">To</InputLabel>
-                    <tr>
-                        <td><b>Name: </b></td>
-                        <td>{this.props.wizardContext.to.name}</td>
-                    </tr>
-                    <tr>
-                        <td><b>Street: </b></td>
-                        <td>{this.props.wizardContext.to.street}</td>
-                    </tr>
-                    <tr>
-                        <td><b>City: </b></td>
-                        <td>{this.props.wizardContext.to.city}</td>
-                    </tr>
-                    <tr>
-                        <td><b>State: </b></td>
-                        <td>{this.props.wizardContext.to.state}</td>
-                    </tr>
-                    <tr>
-                        <td><b>City: </b></td>
-                        <td>{this.props.wizardContext.to.zip}</td>
-                    </tr>
-
-                    <InputLabel htmlFor="component-simple">Weight</InputLabel>
-                    <tr>
-                        <td><b>Weight: </b></td>
-                        <td>{this.props.wizardContext.weight}</td>
-                    </tr>
-
-                    <InputLabel htmlFor="component-simple">Shipping Option</InputLabel>
-                    <tr>
-                        <td><b>Shipping: </b></td>
-                        <td>{this.props.wizardContext.shippingOption === 1 ? "ground" : "priority"}</td>
-                    </tr>
-
-                    <InputLabel htmlFor="component-simple">Total Cost</InputLabel>
-                    <tr>
-                        <td><b>Cost: </b></td>
-                        <td>{this.getTotal()}</td>
-                    </tr>
+                </Typography>
+                <Typography variant="subheading" gutterBottom>
+                    Shipping Option
+                </Typography>
+                   <Typography variant="body1" gutterBottom align="left">
+                       <p>
+                           <span><i>Shipping: </i></span> <b>{this.props.wizardContext.shippingOption === 1 ? "ground" : "priority"}</b>
+                       </p>
+                   </Typography>
+                    <Divider variant="middle" />
+                <Typography variant="subheading" gutterBottom>
+                    Total Cost
+                </Typography>
+                <Typography variant="body1" gutterBottom align="center">
+                    <p>
+                        <span><i>Cost: </i></span> <b>{`$ ${this.getTotal()}`}</b>
+                    </p>
                 </Typography>
                 <div className={classes.buttonContainer}>
                     <div>

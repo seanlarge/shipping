@@ -33,7 +33,7 @@ class GetShippingOption extends React.Component {
             selected: "ground"
         };
 
-        if(props.wizardContext.shippingOption === "" || props.wizardContext.shippingOption === 1){
+        if(this.props.wizardContext.shippingOption === "" || this.props.wizardContext.shippingOption === 1){
             this.state.selected = "ground";
 
         } else {
