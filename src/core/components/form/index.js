@@ -25,7 +25,21 @@ class AddressForm extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            errorText: ''
+            name:{
+                errorText: ''
+            },
+            city: {
+                errorText: ''
+            },
+            state: {
+                errorText: ''
+            },
+            street: {
+                errorText: ''
+            },
+            zip: {
+                errorText: ''
+            }
         }
     }
 
@@ -33,10 +47,10 @@ class AddressForm extends React.Component {
         //TODO Validate if Zip is actually a number
         this.props.wizardContext[key] = e.target.value;
         if (e.target.value === "") {
+            this.setState({[key]: {errorText: 'This field is required'}});
 
-            this.setState({ errorText: 'This field is required' })
         } else {
-            this.setState({ errorText: '' })
+            this.setState({key: {errorText: ''}});
         }
 
     };
@@ -47,8 +61,8 @@ class AddressForm extends React.Component {
             <form action="">
                 <TextField
                     required
-                    helperText={this.state.errorText}
-                    error ={this.state.errorText.length === 0 ? false : true }
+                    helperText={this.state.name.errorText}
+                    error ={this.state.name.errorText.length !== 0 }
                     label="Name"
                     onChange={(e) => this.handleChange(e, 'name')}
                     defaultValue={this.props.wizardContext.name}
@@ -59,8 +73,8 @@ class AddressForm extends React.Component {
                 />
                 <TextField
                     required
-                    helperText={this.state.errorText}
-                    error ={this.state.errorText.length === 0 ? false : true }
+                    helperText={this.state.street.errorText}
+                    error ={this.state.street.errorText.length !== 0 }
                     label="Street"
                     onChange={(e) => this.handleChange(e, 'street')}
                     defaultValue={this.props.wizardContext.street}
@@ -71,8 +85,8 @@ class AddressForm extends React.Component {
                 />
                 <TextField
                     required
-                    helperText={this.state.errorText}
-                    error ={this.state.errorText.length === 0 ? false : true }
+                    helperText={this.state.city.errorText}
+                    error ={this.state.city.errorText.length !== 0 }
                     label="City"
                     className={classes.textField}
                     defaultValue={this.props.wizardContext.city}
@@ -81,8 +95,8 @@ class AddressForm extends React.Component {
                 />
                 <TextField
                     required
-                    helperText={this.state.errorText}
-                    error ={this.state.errorText.length === 0 ? false : true }
+                    helperText={this.state.state.errorText}
+                    error ={this.state.state.errorText.length !== 0 }
                     label="State"
                     onChange={(e) => this.handleChange(e,'state')}
                     defaultValue={this.props.wizardContext.state}
@@ -91,8 +105,8 @@ class AddressForm extends React.Component {
                 />
                 <TextField
                     required
-                    helperText={this.state.errorText}
-                    error ={this.state.errorText.length === 0 ? false : true }
+                    helperText={this.state.zip.errorText}
+                    error ={this.state.zip.errorText.length !== 0 }
                     label="Zip"
                     onChange={(e) => this.handleChange(e,'zip')}
                     defaultValue={this.props.wizardContext.zip}
