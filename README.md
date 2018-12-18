@@ -1,3 +1,11 @@
+## Shipping Label 
+It was interesting working with this project only using the state of each component versus
+something like mobx (which is what I have been using for a majority of this year). Throughout the code
+I have left comments by starting them with : TODO. In on step, I used the constructor to set the state before the rest of the 
+component mounted. I looked into using different lifecycle methods like componentDidMount(which comes after render()) and the getDerivedStateFromProps method.
+For style and reusable components I choose material UI, they have a nice way of styling things and creating reusable components. There are some minor validations on the forms and on the shipping options step
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
