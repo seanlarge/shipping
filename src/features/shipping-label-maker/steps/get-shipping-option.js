@@ -32,7 +32,9 @@ class GetShippingOption extends React.Component {
             },
             selected: "ground"
         };
-
+        // TODO setting this in constructor because of when lifecycle methods are called
+        // TODO componentDidMount is called after render() and we need to maintain what the user
+        // TODO Selects in case they move back and forth from this component
         if(this.props.wizardContext.shippingOption === "" || this.props.wizardContext.shippingOption === 1){
             this.state.selected = "ground";
 
@@ -42,17 +44,13 @@ class GetShippingOption extends React.Component {
     }
 
     handleChange = e => {
-        console.log(e.target.value);
         this.props.wizardContext.shippingOption = e.target.value;
-        console.log(this.props.wizardContext);
         this.setState(() => {
             return {
                 selected: e.target.value
             }
         })
     };
-
-    //TODO ONLY USING THIS LIFECYCLE METHOD BECAUSE WE CAN'T USE A STORE FOR CHALLENGE
 
 
     render() {
@@ -92,11 +90,14 @@ class GetShippingOption extends React.Component {
                         <Button
                             variant="contained"
                             color="primary"
+                            disabled={this.props.wizardContext.shippingOption === ""}
                             onClick={() => this.props.onAction("next")}
                             className={classes.button}
                         >
                             {this.props.activeStep === 4 ? 'Finish' : 'Next'}
                         </Button>
+                        <br/>
+                        <i style={{display: this.props.wizardContext.shippingOption === "" ? "inline" : "none"}}>you must pick a shipping option in order to continue</i>
                     </div>
                 </div>
             </div>

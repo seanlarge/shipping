@@ -9,18 +9,18 @@ export default class ShippingLabelMaker extends React.Component {
         this.state = {
             wizardContext: {
                 from: {
-                    name: "Sean Large",
-                    street: "1123 hope st sw, apt 100",
-                    city: "Washington",
-                    state: "DC",
-                    zip: "20045"
+                    name: "",
+                    street: "",
+                    city: "",
+                    state: "",
+                    zip: ""
                 },
                 to: {
-                    name: "Jenny Sweet",
-                    street: "234 test street",
-                    city: "Augusta",
-                    state: "GA",
-                    zip: "34543"
+                    name: "",
+                    street: "",
+                    city: "",
+                    state: "",
+                    zip: ""
                 },
                 weight: null,
                 shippingOption: ""
@@ -46,6 +46,7 @@ export default class ShippingLabelMaker extends React.Component {
 
     handleOnComplete = () =>{
         console.log(this.state.wizardContext);
+        alert("Your Label is complete!");
     };
 
     render() {
