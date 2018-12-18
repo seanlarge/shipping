@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AddressForm from "../../../core/components/form";
 import Button from "@material-ui/core/Button";
-import StepContent from "@material-ui/core/StepContent";
 import {withStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 
@@ -27,7 +26,7 @@ class GetReceiverAddress extends React.Component {
                 <Typography component="h2" variant="headline" gutterBottom>
                     {this.props.getHeader}
                 </Typography>
-                <AddressForm wizardContext={this.props.wizardContext}/>
+                <AddressForm wizardContext={this.props.wizardContext.to}/>
                 <div>
                     <div>
                         <Button

@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StepContent from '@material-ui/core/StepContent';
 import AddressForm from "../../../core/components/form/index";
 import Button from "@material-ui/core/Button";
 import {withStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
     button: {
@@ -28,7 +26,7 @@ class GetSenderAddress extends React.Component {
                    <Typography component="h2" variant="headline" gutterBottom>
                        {this.props.getHeader}
                    </Typography>
-                   <AddressForm wizardContext={this.props.wizardContext}/>
+                   <AddressForm wizardContext={this.props.wizardContext.from} />
                    <div>
                        <div>
                            <Button
@@ -57,8 +55,8 @@ class GetSenderAddress extends React.Component {
 GetSenderAddress.propTypes = {
     wizardContext: PropTypes.object.isRequired,
     onAction: PropTypes.func.isRequired,
-    activeStep: PropTypes.int,
-    getHeader: PropTypes.func.isRequired
+    activeStep: PropTypes.number,
+    getHeader: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(GetSenderAddress);

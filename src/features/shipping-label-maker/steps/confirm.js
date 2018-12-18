@@ -21,6 +21,9 @@ const styles = theme => ({
                 <Typography component="h2" variant="headline" gutterBottom>
                     {this.props.getHeader}
                 </Typography>
+                <Typography component="h2" variant="body" gutterBottom>
+                    {JSON.stringify(this.props.wizardContext)}
+                </Typography>
                 <div className={classes.buttonContainer}>
                     <div>
                         <Button

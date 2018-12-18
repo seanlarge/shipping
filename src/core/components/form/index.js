@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
     container: {
@@ -21,46 +21,66 @@ const styles = theme => ({
     },
 });
 
-const AddressForm = (props) => (
-        <form action="">
-            <TextField
-                required
-                label="Name"
-                style={{ margin: 8 }}
-                fullWidth
-                margin="normal"
-                variant="filled"
-            />
-            <TextField
-                required
-                label="Street"
-                style={{ margin: 8 }}
-                fullWidth
-                margin="normal"
-                variant="filled"
-            />
-            <TextField
-                required
-                label="City"
-                className={props.classes.textField}
-                //value={this.state.name}
-                //onChange={this.handleChange('name')}
-                margin="normal"
-            />
-            <TextField
-                required
-                label="State"
-                className={props.classes.textField}
-                margin="normal"
-            />
-            <TextField
-                required
-                label="Zip"
-                className={props.classes.textField}
-                margin="normal"
-            />
-        </form>
-);
+class AddressForm extends React.Component {
+
+    handleChange = (e, key) => {
+        this.props.wizardContext[key] = e.target.value;
+
+    };
+
+    render() {
+        const {classes} = this.props;
+        return (
+            <form action="">
+                <TextField
+                    required
+                    label="Name"
+                    onChange={(e) => this.handleChange(e, 'name')}
+                    defaultValue={this.props.wizardContext.name}
+                    style={{margin: 8}}
+                    fullWidth
+                    margin="normal"
+                    variant="filled"
+                />
+                <TextField
+                    required
+                    label="Street"
+                    onChange={(e) => this.handleChange(e, 'street')}
+                    defaultValue={this.props.wizardContext.street}
+                    style={{margin: 8}}
+                    fullWidth
+                    margin="normal"
+                    variant="filled"
+                />
+                <TextField
+                    required
+                    label="City"
+                    className={classes.textField}
+                    defaultValue={this.props.wizardContext.city}
+                    onChange={(e) => this.handleChange(e, 'city')}
+                    margin="normal"
+                />
+                <TextField
+                    required
+                    label="State"
+                    onChange={(e) => this.handleChange(e,'state')}
+                    defaultValue={this.props.wizardContext.state}
+                    className={classes.textField}
+                    margin="normal"
+                />
+                <TextField
+                    required
+                    label="Zip"
+                    onChange={(e) => this.handleChange(e,'zip')}
+                    defaultValue={this.props.wizardContext.zip}
+                    className={classes.textField}
+                    margin="normal"
+                />
+            </form>
+        );
+    }
+}
+
 
 AddressForm.propTypes = {
     classes: PropTypes.object.isRequired,

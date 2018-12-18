@@ -23,16 +23,16 @@ export default class ShippingLabelMaker extends React.Component {
                     zip: ""
                 },
                 weight: null,
-                shippingOption: null
+                shippingOption: ""
             }
         }
     }
     getHeader = (activeStep) =>{
         switch (activeStep) {
             case 0:
-                return 'Enter the sender\'\s address';
+                return "Enter the senders address";
             case 1:
-                return 'Enter the recevier\'\s address';
+                return "Enter the receivers address";
             case 2:
                 return 'Enter item weight';
             case 3:
