@@ -14,6 +14,7 @@ configure({ adapter: new Adapter() });
 
 
 import {shallow, mount, render} from 'enzyme';
+import GetSenderAddress from "../../../features/shipping-label-maker/steps/get-sender-address";
 
 
 describe("Wizard: ", () =>{
@@ -92,5 +93,6 @@ describe("Wizard: ", () =>{
         done();
     });
 
+   
 
 });
