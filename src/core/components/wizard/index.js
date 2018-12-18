@@ -40,6 +40,9 @@ class Wizard extends React.Component {
     }
 
     handleAction = action => {
+        if(action === "complete"){
+            this.props.onComplete();
+        }
         if (action === "next") {
             this.setState({
                 activeStep: this.state.activeStep + 1
@@ -55,7 +58,8 @@ class Wizard extends React.Component {
         this.setState({
             selectedShipping: value
         })
-    }
+    };
+
     renderSteps = (index) => {
         let steps = [
             <GetSenderAddress wizardContext={this.props.wizardContext} onAction={(action) => this.handleAction(action)}
